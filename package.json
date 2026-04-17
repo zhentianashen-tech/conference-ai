@@ -1,0 +1,47 @@
+{
+  "name": "conference-assistant",
+  "version": "2.0.0",
+  "description": "Enhanced conference call assistant with better ASR, proactive suggestions, web search & Gemini API",
+  "main": "index.js",
+  "bin": {
+    "conference-ai": "./bin/conference-ai.js"
+  },
+  "scripts": {
+    "start": "node index-v3.js --session ./sessions/generic.yaml",
+    "devices": "node setup.js",
+    "setup": "node setup.js",
+    "download-model": "npx nodejs-whisper download-model",
+    "test": "echo 'Tests not implemented yet'",
+    "test:lmstudio": "node scripts/test-lmstudio.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "blessed": "^0.1.81",
+    "compromise": "^14.15.0",
+    "dotenv": "^16.4.5",
+    "duck-duck-scrape": "^2.2.7",
+    "express": "^5.2.1",
+    "js-yaml": "^4.1.1",
+    "nodejs-whisper": "^0.3.0",
+    "openai": "^4.47.1",
+    "socket.io": "^4.8.3",
+    "ws": "^8.20.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "conference",
+    "assistant",
+    "transcription",
+    "whisper",
+    "ai",
+    "gemini",
+    "ollama",
+    "lmstudio",
+    "llm",
+    "gguf"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,89 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Conference Assistant v3 — Session File
+# ─────────────────────────────────────────────────────────────────────────────
+# Usage: node index-v3.js --session ./sessions/example-conference.yaml
+#
+# All fields are optional except `title`. Remove what you don't need.
+# ─────────────────────────────────────────────────────────────────────────────
+
+title: "AI Startup Demo Day — Pitch Review"
+date: "2026-04-15"
+
+participants:
+  - Alan (Reviewer)
+  - Presenter (TBD)
+  - Investor Guest (TBD)
+
+# Free-form background text — injected verbatim into the system prompt.
+background: |
+  This is a demo day pitch evaluation. We are assessing early-stage AI startups
+  for potential investment or partnership consideration.
+  Alan is the primary reviewer. The presenter has 20 minutes to pitch.
+
+# High-level goals — guide the proactive analyzer's focus.
+goals:
+  - Understand the startup's core value proposition and problem-fit
+  - Assess technical differentiation and defensibility
+  - Evaluate go-to-market strategy and traction
+  - Understand team background and execution capability
+  - Clarify funding ask and use of proceeds
+
+# Questionnaire — the assistant tracks coverage of every item in real-time.
+# Fields:
+#   id        : unique identifier (required)
+#   question  : full question text shown in reminders
+#   keywords  : trigger words used for keyword-heuristic coverage detection
+#   priority  : high | medium | low  (affects reminder frequency)
+questionnaire:
+  - id: q1
+    question: "What specific problem does the product solve, and who is the target customer?"
+    keywords: [problem, pain, customer, target, user, market, serve, solve]
+    priority: high
+
+  - id: q2
+    question: "What is the core technical innovation or defensible differentiation?"
+    keywords: [technology, innovation, proprietary, patent, model, algorithm, differentiation, moat, unique]
+    priority: high
+
+  - id: q3
+    question: "What is the current revenue or traction (ARR, MRR, users, pilots, LOIs)?"
+    keywords: [revenue, ARR, MRR, traction, customers, users, pilots, letters of intent, LOI, contracts, growth]
+    priority: high
+
+  - id: q4
+    question: "Who are the main competitors and what is the competitive moat?"
+    keywords: [competitor, competition, moat, advantage, versus, compared to, alternative, incumbent]
+    priority: high
+
+  - id: q5
+    question: "What is the team's background and relevant domain experience?"
+    keywords: [team, founder, background, experience, previously, prior, PhD, worked at, built, launched]
+    priority: medium
+
+  - id: q6
+    question: "What is the funding ask and planned use of proceeds?"
+    keywords: [raise, raising, funding, investment, million, round, seed, series, use of proceeds, runway, burn rate]
+    priority: medium
+
+  - id: q7
+    question: "What is the go-to-market strategy and primary sales motion?"
+    keywords: [go-to-market, GTM, sales, distribution, channel, partnership, enterprise, PLG, outbound, inbound]
+    priority: medium
+
+  - id: q8
+    question: "What are the key risks and how does the team plan to mitigate them?"
+    keywords: [risk, challenge, concern, obstacle, mitigation, barrier, regulation, compliance]
+    priority: low
+
+  - id: q9
+    question: "What does the product roadmap look like over the next 12 months?"
+    keywords: [roadmap, next year, plan, feature, launch, ship, milestone, Q1, Q2, Q3, Q4]
+    priority: low
+
+# Additional free-form notes appended to the system prompt.
+notes: |
+  Pay close attention to:
+  - Data provenance if the product involves model training.
+  - Enterprise security posture (SOC2, data residency, etc.) for B2B products.
+  - Whether the founder can articulate unit economics clearly.
+  If the presenter speaks in Chinese, respond to that content in Chinese.

@@ -1,0 +1,23 @@
+node_modules/
+.env
+
+# Session output transcripts (contain call content)
+sessions/*.md
+
+# Whisper model binaries
+*.bin
+*.gguf
+
+# Claude Code local settings
+.claude/
+
+# Broken symlinks / stray files
+conferen
+
+# macOS
+.DS_Store
+
+# Temp audio chunks
+*.wav
+*.mp3
+*.m4a

@@ -1,0 +1,33 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Conference Assistant v3 — Session Template
+# Copy this file, rename it, and fill in your own details.
+# Usage: node index-v3.js --session ./sessions/my-session.yaml
+# ─────────────────────────────────────────────────────────────────────────────
+
+title: "My Conference Session"
+date: "2026-01-01"
+
+participants:
+  - Your Name
+  - Guest (TBD)
+
+background: |
+  Brief background about this meeting or conference.
+
+goals:
+  - Goal 1
+  - Goal 2
+
+questionnaire:
+  - id: q1
+    question: "Your first question?"
+    keywords: [keyword1, keyword2]
+    priority: high   # high | medium | low
+
+  - id: q2
+    question: "Your second question?"
+    keywords: [keyword3, keyword4]
+    priority: medium
+
+notes: |
+  Any extra instructions for the assistant.

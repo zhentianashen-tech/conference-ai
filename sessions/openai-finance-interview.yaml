@@ -1,0 +1,221 @@
+title: "OpenAI 金融领域模型技术深度访谈"
+date: "2026-04-15"
+
+participants:
+  - Alan (访谈者)
+  - OpenAI 受访者 (TBD)
+
+background: |
+  对 OpenAI 金融领域大模型的全链路技术栈、数据策略、商业模式和市场格局进行深度调研。
+  涵盖从基模到领域模型的预/中/后训练各阶段，以及推理部署、客户结构和市场占比等。
+
+goals:
+  - 理解 OpenAI 金融领域模型的完整技术路径（预训练 → 中训练 → 后训练）
+  - 摸清金融数据来源、合作方式和更新机制
+  - 了解金融推理层的核心技术差异（严谨性、合规、可审计）
+  - 获取收入结构、客户集中度和 MaaS 市场数据
+  - 理解市场格局与竞争定位
+
+questionnaire:
+
+  # ── 预训练 / 基模 ────────────────────────────────────────────────
+
+  - id: pt1
+    question: "GPT-5.4 vs GPT-5（实际部署版）：参数量级、数据配比、架构（router/main/thinking）、MoE expert数量和细分领域是什么？"
+    keywords: [参数, 数据配比, 架构, router, expert, MoE, gpt-5, gpt-5.4]
+    priority: high
+
+  - id: pt2
+    question: "GPT-5.4 的 Test-Time Compute + Monte Carlo Tree Search + 图检索 与原来 GPT-5 inference time scaling 的核心差异是什么？"
+    keywords: [test-time compute, monte carlo, MCTS, 图检索, inference scaling, 思考]
+    priority: high
+
+  - id: pt3
+    question: "内部保留了哪些核心 checkpoint？数量、规模、各自特点？包括 teacher model、STEM judge、金融 verifier？"
+    keywords: [checkpoint, teacher model, judge, verifier, 金融, STEM]
+    priority: high
+
+  - id: pt4
+    question: "OpenAI 当前对金融领域客户提供哪些模型服务？订阅制（API/Enterprise）、托管、私有化部署和定制各有哪些？"
+    keywords: [金融, 服务, API, Enterprise, 托管, 私有化, 定制, 模型服务]
+    priority: high
+
+  - id: pt5
+    question: "金融领域模型是基于 GPT-5 某个 checkpoint 持续训练，还是从零开始训练的？"
+    keywords: [持续训练, 从零, checkpoint, 继续训练, continual training]
+    priority: high
+
+  - id: pt6
+    question: "金融领域模型是否来自 GPT-5 或新版本的剪枝（pruning）？"
+    keywords: [剪枝, pruning, 去枝, 蒸馏, distill]
+    priority: medium
+
+  # ── 中训练 / 领域适应 ────────────────────────────────────────────
+
+  - id: mt1
+    question: "中训练阶段的数据配比策略：如何在不遗忘通用知识的前提下注入金融领域知识？"
+    keywords: [数据配比, 遗忘, catastrophic forgetting, 金融知识, 中训练, 领域适应]
+    priority: high
+
+  - id: mt2
+    question: "中训练阶段是否已开始让模型接触长线程轨迹（long-horizon trajectory）？"
+    keywords: [长线程, long horizon, trajectory, 轨迹, 中训练]
+    priority: medium
+
+  - id: mt3
+    question: "如何在中训练阶段拓展上下文窗口？"
+    keywords: [上下文窗口, context window, 扩展, 长文本, rope, position]
+    priority: medium
+
+  # ── 后训练 ───────────────────────────────────────────────────────
+
+  - id: ft1
+    question: "SFT 阶段：金融医疗模型是否仅用 PEFT 加训，没有动原来剪枝后的 GPT-5 骨架？"
+    keywords: [SFT, PEFT, LoRA, 微调, 骨架, 后训练, fine-tuning]
+    priority: high
+
+  - id: ft2
+    question: "RL 阶段的多轮奖励设计：重点提升哪几个维度？哪些风格？如何降低幻觉？是否基于 GPT-5.4 过程框架还是金融专属搭建？"
+    keywords: [RL, 奖励, reward, 多轮, 幻觉, hallucination, 过程奖励, 风格]
+    priority: high
+
+  - id: ft3
+    question: "金融领域 agentic RL 环境建设：投入了多少资源，设置了哪些类型的沙箱环境？"
+    keywords: [agentic, RL, 沙箱, sandbox, 环境, 资源, 投入]
+    priority: medium
+
+  - id: ft4
+    question: "GPT-5.4 在重表格任务上有优势——这是如何提升的？是否有微软或合作伙伴（水星计划）在系统/数据层面的支持？"
+    keywords: [表格, table, 微软, microsoft, 水星, 合作, 数据支持]
+    priority: medium
+
+  - id: ft5
+    question: "是否针对金融场景额外训练了自动升降「思考档位」能力？是否在 RL 阶段训练的？"
+    keywords: [思考档位, thinking level, 自动, RL, 金融, 推理深度]
+    priority: medium
+
+  - id: ft6
+    question: "各训练阶段合成数据占比是多少？是否着重覆盖 OOD（分布外）场景？"
+    keywords: [合成数据, synthetic, OOD, 分布外, 占比, 数据来源]
+    priority: medium
+
+  # ── 金融数据来源 ─────────────────────────────────────────────────
+
+  - id: d1
+    question: "合作数据占多少？哪些数据类型？是以 API 调取或打折为交换的合作模式？"
+    keywords: [合作数据, 数据合作, API, 打折, 授权, 数据类型]
+    priority: high
+
+  - id: d2
+    question: "采买数据占多少？主要采买哪几类数据？成本大致多少？"
+    keywords: [采买, 购买, 数据成本, 数据类型, 金融数据]
+    priority: high
+
+  - id: d3
+    question: "如何针对金融数据的时间敏感度进行分类？以什么周期更新训练数据和知识库数据？"
+    keywords: [时间敏感, 实时, 更新周期, 知识库, 训练数据, 频率]
+    priority: high
+
+  # ── 推理层 ───────────────────────────────────────────────────────
+
+  - id: inf1
+    question: "金融领域模型推理 vs GPT-5 通用版：如何达到严谨性、实时性、合规、可审计？解决了哪些核心难点？"
+    keywords: [严谨, 实时, 合规, 可审计, 推理, 金融, compliance, audit]
+    priority: high
+
+  # ── 核心技术 ─────────────────────────────────────────────────────
+
+  - id: tech1
+    question: "任务路由：是否类似 GPT-5 的 main+thinking 系统，还是金融专属的一套不同系统？"
+    keywords: [任务路由, routing, main, thinking, 系统架构, dispatcher]
+    priority: high
+
+  - id: tech2
+    question: "知识引擎架构：仓、库、湖的设计，实时同步机制是什么？"
+    keywords: [知识引擎, 数据仓, 数据库, 数据湖, 实时同步, 知识库]
+    priority: high
+
+  - id: tech3
+    question: "RAG 和检索层：如何实现快速、高准确率的检索？"
+    keywords: [RAG, 检索, retrieval, 向量, embedding, 准确率, 延迟]
+    priority: high
+
+  - id: tech4
+    question: "其他重点技术：模型推理优化和客户端部署相关的核心技术？"
+    keywords: [推理优化, 部署, inference, 量化, 客户端, edge]
+    priority: medium
+
+  # ── 能力与行为 ───────────────────────────────────────────────────
+
+  - id: cap1
+    question: "对比通用版，金融领域模型训练重点关注哪些模型能力、风格和行为特征？"
+    keywords: [能力, 风格, 行为, 金融, 对比, 特征, 通用]
+    priority: high
+
+  # ── 收入与商业 ───────────────────────────────────────────────────
+
+  - id: biz1
+    question: "整体收入：2025 年实现的收入和 ARR，2026 Q1 数据（若有）？"
+    keywords: [收入, ARR, revenue, 2025, 2026, Q1, 营收]
+    priority: high
+
+  - id: biz2
+    question: "客户类型收入拆分：C vs B；B 端按行业分类，金融占多少？"
+    keywords: [C端, B端, 行业, 金融占比, 客户类型, 分类]
+    priority: high
+
+  - id: biz3
+    question: "金融行业客户集中度：头部 5/20/50 客户分别贡献多少营收？典型客户类型、收费模式、合同规模？"
+    keywords: [集中度, 头部客户, 合同, 收费模式, 规模, 金融客户]
+    priority: high
+
+  - id: biz4
+    question: "按产品/解决方案/收费模式拆分收入结构是什么？"
+    keywords: [产品, 解决方案, 收费模式, 订阅, API, 收入结构]
+    priority: medium
+
+  # ── MaaS 市场 ────────────────────────────────────────────────────
+
+  - id: mkt1
+    question: "美国 MaaS 市场一年规模是多少？OpenAI 占多少？金融 MaaS 细分板块呢？"
+    keywords: [MaaS, 市场规模, 市占率, 金融, 美国, TAM]
+    priority: high
+
+  - id: mkt2
+    question: "金融领域里 OpenAI 如何划分客户和生态？有几种合作模式，如何分润？"
+    keywords: [客户分层, 生态, 合作模式, 分润, 金融, 渠道]
+    priority: medium
+
+  - id: mkt3
+    question: "企业流程渗透：财务软件、资源管理平台的渗透形态？shared context 如何跨团队跨周期？"
+    keywords: [流程渗透, 财务软件, ERP, shared context, 跨团队, 跨周期]
+    priority: medium
+
+  # ── 算力与组织 ───────────────────────────────────────────────────
+
+  - id: res1
+    question: "金融领域模型训练集群：时间、卡的类型和数量？"
+    keywords: [算力, 集群, GPU, H100, 训练时间, 卡, compute]
+    priority: medium
+
+  - id: res2
+    question: "针对金融业务的组织形态、人才结构、职能设计——哪些是 shared，哪些是金融专属？"
+    keywords: [组织, 人才, 团队, shared, 专属, 金融业务, 职能]
+    priority: medium
+
+  # ── 市场格局 ─────────────────────────────────────────────────────
+
+  - id: mkt4
+    question: "美国 AI 市场格局：云层、PaaS 层、Agentic 系统层各自的竞争格局？"
+    keywords: [市场格局, 云, PaaS, agentic, 竞争, 格局]
+    priority: medium
+
+  - id: mkt5
+    question: "OpenAI vs Anthropic 在金融领域的市场定位和市场占比？"
+    keywords: [Anthropic, OpenAI, 市场占比, market share, 定位, 竞争]
+    priority: high
+
+notes: |
+  访谈重点：技术深度优先，商业数据次之。
+  对于敏感数据（营收、客户名称）可接受模糊范围答案。
+  如对方回避具体数字，可追问量级或与竞争对手相对关系。

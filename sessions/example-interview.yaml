@@ -1,0 +1,56 @@
+title: "Candidate Interview — Engineering Role"
+date: "2026-04-15"
+
+participants:
+  - Alan (Interviewer)
+  - Candidate (TBD)
+
+background: |
+  Technical interview for a senior software engineering role.
+  Focus on system design, problem-solving approach, and cultural fit.
+
+goals:
+  - Assess technical depth in distributed systems and backend engineering
+  - Evaluate problem-solving approach and communication clarity
+  - Understand past projects and ownership mentality
+  - Gauge cultural fit and growth mindset
+
+questionnaire:
+  - id: i1
+    question: "Walk me through a technically complex project you led end-to-end."
+    keywords: [project, led, built, designed, architected, shipped, owned, complex]
+    priority: high
+
+  - id: i2
+    question: "How did you handle a major technical failure or production incident?"
+    keywords: [incident, failure, outage, bug, production, postmortem, root cause, fix, recover]
+    priority: high
+
+  - id: i3
+    question: "How do you approach system design for scale?"
+    keywords: [scale, design, distributed, architecture, load, throughput, latency, bottleneck]
+    priority: high
+
+  - id: i4
+    question: "What is your experience with data pipelines or ML infrastructure?"
+    keywords: [data pipeline, ML, machine learning, infrastructure, ETL, feature store, training, serving]
+    priority: medium
+
+  - id: i5
+    question: "How do you manage disagreements with colleagues or stakeholders?"
+    keywords: [disagree, conflict, stakeholder, push back, alignment, communicate, influence]
+    priority: medium
+
+  - id: i6
+    question: "What are you looking for in your next role and why are you interested in us?"
+    keywords: [looking for, next role, why us, interested, motivation, join, career]
+    priority: medium
+
+  - id: i7
+    question: "What is your expected compensation range?"
+    keywords: [salary, compensation, range, expect, package, equity, stock, RSU]
+    priority: low
+
+notes: |
+  Take note of: clarity of explanation, ability to go deep on request, and
+  how candidate responds to follow-up probing questions.
